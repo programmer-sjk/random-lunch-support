@@ -1,0 +1,22 @@
+{
+  "name": "random-lunch-support",
+  "version": "1.0.0",
+  "description": "- HR 담당자분이 바쁠 경우 랜덤 런치가 진행되지 않음 - 조금이라도 수고를 줄이고자 자동화를 조금 지원",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/programmer-sjk/random-lunch-support.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/programmer-sjk/random-lunch-support/issues"
+  },
+  "homepage": "https://github.com/programmer-sjk/random-lunch-support#readme",
+  "dependencies": {
+    "pkg": "^5.8.1"
+  }
+}
