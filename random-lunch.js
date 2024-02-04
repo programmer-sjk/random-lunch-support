@@ -1,4 +1,5 @@
-const readline = require("readline");
+import readline from 'readline';
+import clipboardy from 'clipboardy';
 readline.emitKeypressEvents(process.stdin);
 
 const message = `
@@ -10,13 +11,15 @@ const message = `
 console.log(message);
 
 process.stdin.setRawMode(true);
-process.stdin.on("keypress", (key, data) => {
-  if (data.name === "q") {
-    process.exit();
+process.stdin.on('keypress', async (_, data) => {
+  if (data.name === 'r') {
+    // shuffleMembers();
+    // showMessage();
+    console.log('Press a key');
   } else {
-    console.log("key", key);
-    console.log("data", data);
+    await clipboardy.write(message);
+    process.exit();
   }
 });
 
-console.log("Press a key");
+console.log('Press a key');
