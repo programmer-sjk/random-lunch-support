@@ -99,5 +99,7 @@ function createMessage(members) {
 function showMessage(message) {
   console.log('안녕하세요. HR 담당자님!');
   console.log(message);
-  console.log('종료하려면 Q, 재실행은 R');
+  console.log(
+    '재실행은 R 입력, 다른 키는 랜덤 런치 결과가 클립보드에 복사되며 종료됩니다.',
+  );
 }
