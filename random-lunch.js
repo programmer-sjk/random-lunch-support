@@ -43,53 +43,50 @@ const members = [
 ];
 
 function splitMembers(members) {
-  const results = [];
   const limit = 4;
   const memberCount = members.length;
-  let countOfFourMember, countOfThreeMember, countOfFourTeam;
+  let countOfFourMember, countOfThreeMember;
 
   const remainder = memberCount % limit;
   switch (remainder) {
     case 0:
     case 3:
+      const results = [];
       for (let i = 0; i < memberCount; i += limit) {
         results.push(members.slice(i, i + limit));
       }
-      break;
+      return results;
     case 1:
       countOfFourMember = Math.floor(memberCount / limit) - 2;
       countOfThreeMember = 3;
-      for (let i = 0; i < countOfFourMember; i++) {
-        const start = i * limit;
-        results.push(members.slice(start, start + limit));
-      }
-
-      countOfFourTeam = results.length;
-      for (let i = 0; i < countOfThreeMember; i++) {
-        const start = countOfFourTeam * 4 + i * 3;
-        const eachTeam = members.slice(start, start + 3);
-        if (eachTeam.length) {
-          results.push(eachTeam);
-        }
-      }
-      break;
+      return splitByTeamCount(countOfFourMember, countOfThreeMember, limit);
     case 2:
       countOfFourMember = Math.floor(memberCount / limit) - 1;
       countOfThreeMember = 2;
-      for (let i = 0; i < countOfFourMember; i++) {
-        const start = i * limit;
-        results.push(members.slice(start, start + limit));
-      }
+      return splitByTeamCount(countOfFourMember, countOfThreeMember, limit);
+    default:
+      throw new Error(`Server Error, remainder=${remainder}`);
+  }
+}
 
-      countOfFourTeam = results.length;
-      for (let i = 0; i < countOfThreeMember; i++) {
-        const start = countOfFourTeam * 4 + i * 3;
-        const eachTeam = members.slice(start, start + 3);
-        if (eachTeam.length) {
-          results.push(eachTeam);
-        }
-      }
-      break;
+function splitByTeamCount(
+  countOfFourMember,
+  countOfThreeMember,
+  increaseAmount,
+) {
+  const results = [];
+  for (let i = 0; i < countOfFourMember; i++) {
+    const start = i * increaseAmount;
+    results.push(members.slice(start, start + increaseAmount));
+  }
+
+  const countOfFourTeam = results.length;
+  for (let i = 0; i < countOfThreeMember; i++) {
+    const start = countOfFourTeam * 4 + i * 3;
+    const eachTeam = members.slice(start, start + 3);
+    if (eachTeam.length) {
+      results.push(eachTeam);
+    }
   }
 
   return results;
