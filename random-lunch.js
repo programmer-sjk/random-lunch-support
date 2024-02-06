@@ -46,7 +46,7 @@ function splitMembers(members) {
   const results = [];
   const limit = 4;
   const memberCount = members.length;
-  let fourMemberTeamCount, threeMemberTeamCount, fourTeamCount;
+  let countOfFourMember, countOfThreeMember, countOfFourTeam;
 
   const remainder = memberCount % limit;
   switch (remainder) {
@@ -57,16 +57,16 @@ function splitMembers(members) {
       }
       break;
     case 1:
-      fourMemberTeamCount = Math.floor(memberCount / limit) - 2;
-      threeMemberTeamCount = 3;
-      for (let i = 0; i < fourMemberTeamCount; i++) {
+      countOfFourMember = Math.floor(memberCount / limit) - 2;
+      countOfThreeMember = 3;
+      for (let i = 0; i < countOfFourMember; i++) {
         const start = i * limit;
         results.push(members.slice(start, start + limit));
       }
 
-      fourTeamCount = results.length;
-      for (let i = 0; i < threeMemberTeamCount; i++) {
-        const start = fourTeamCount * 4 + i * 3;
+      countOfFourTeam = results.length;
+      for (let i = 0; i < countOfThreeMember; i++) {
+        const start = countOfFourTeam * 4 + i * 3;
         const eachTeam = members.slice(start, start + 3);
         if (eachTeam.length) {
           results.push(eachTeam);
@@ -74,16 +74,16 @@ function splitMembers(members) {
       }
       break;
     case 2:
-      fourMemberTeamCount = Math.floor(memberCount / limit) - 1;
-      threeMemberTeamCount = 2;
-      for (let i = 0; i < fourMemberTeamCount; i++) {
+      countOfFourMember = Math.floor(memberCount / limit) - 1;
+      countOfThreeMember = 2;
+      for (let i = 0; i < countOfFourMember; i++) {
         const start = i * limit;
         results.push(members.slice(start, start + limit));
       }
 
-      fourTeamCount = results.length;
-      for (let i = 0; i < threeMemberTeamCount; i++) {
-        const start = fourTeamCount * 4 + i * 3;
+      countOfFourTeam = results.length;
+      for (let i = 0; i < countOfThreeMember; i++) {
+        const start = countOfFourTeam * 4 + i * 3;
         const eachTeam = members.slice(start, start + 3);
         if (eachTeam.length) {
           results.push(eachTeam);
