@@ -2,30 +2,6 @@ import readline from 'readline';
 import clipboardy from 'clipboardy';
 readline.emitKeypressEvents(process.stdin);
 
-const message = `
-  랜덤런치 리스트입니다.
-  1조: A, B, C
-  2조: D, E, F
-`;
-
-console.log(message);
-
-process.stdin.setRawMode(true);
-process.stdin.on('keypress', async (_, data) => {
-  if (data.name === 'r') {
-    // shuffleMembers();
-    // showMessage();
-    console.log('Press a key');
-  } else {
-    await clipboardy.write(message);
-    process.exit();
-  }
-});
-
-function shuffleMembers(members) {
-  return members.sort(() => Math.random() - 0.5);
-}
-
 const members = [
   'A',
   'B',
@@ -41,6 +17,26 @@ const members = [
   'L',
   'M',
 ];
+
+process.stdin.setRawMode(true);
+process.stdin.on('keypress', async (k, data) => {
+  if (data.name === 'r') {
+    await doProcess();
+  } else {
+    process.exit();
+  }
+});
+
+await doProcess();
+async function doProcess() {
+  const message = createMessage(splitMembers(shuffleMembers(members)));
+  await clipboardy.write(message);
+  showMessage(message);
+}
+
+function shuffleMembers(members) {
+  return members.sort(() => Math.random() - 0.5);
+}
 
 function splitMembers(members) {
   const limit = 4;
@@ -95,12 +91,13 @@ function splitByTeamCount(
 function createMessage(members) {
   let message = '오늘의 랜덤런치!';
   for (const member of members) {
-    message += `\n * ${member.join(', ')}`;
+    message += `\n - ${member.join(', ')}`;
   }
   return message;
 }
 
 function showMessage(message) {
-  console.log('안녕하세요. HR 담당자님! 오늘의 랜덤 런치 결과입니다!');
+  console.log('안녕하세요. HR 담당자님!');
   console.log(message);
+  console.log('종료하려면 Q, 재실행은 R');
 }
