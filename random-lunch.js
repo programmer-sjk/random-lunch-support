@@ -1,22 +1,21 @@
 import readline from 'readline';
 import clipboardy from 'clipboardy';
+import xlsx from 'xlsx';
 readline.emitKeypressEvents(process.stdin);
 
-const members = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-];
+const workbook = xlsx.readFile('random_lunch.xlsx');
+const sheetName = workbook.SheetNames[0];
+const sheet = workbook.Sheets[sheetName];
+
+const range = xlsx.utils.decode_range(sheet['!ref']);
+const rowCount = range.e.r;
+const members = [];
+for (let i = 2; i <= rowCount; i++) {
+  const name = sheet[`A${i}`];
+  const attendance = sheet[`B${i}`];
+
+  members.push(name.v);
+}
 
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', async (k, data) => {
