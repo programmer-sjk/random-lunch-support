@@ -91,7 +91,7 @@ function splitByTeamCount(
 function createMessage(members) {
   let message = '오늘의 랜덤런치!';
   for (const member of members) {
-    message += `\n - ${member.join(', ')}`;
+    message += `\n • ${member.join(', ')}`;
   }
   return message;
 }
