@@ -20,7 +20,8 @@
   "homepage": "https://github.com/programmer-sjk/random-lunch-support#readme",
   "dependencies": {
     "clipboardy": "^4.0.0",
-    "pkg": "^5.8.1"
+    "pkg": "^5.8.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
