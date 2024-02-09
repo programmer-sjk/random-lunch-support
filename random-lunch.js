@@ -14,7 +14,25 @@ for (let i = 2; i <= rowCount; i++) {
   const name = sheet[`A${i}`];
   const attendance = sheet[`B${i}`];
 
+  if (isInvalid(name, attendance)) {
+    continue;
+  }
   members.push(name.v);
+}
+
+function isInvalid(name, attendance) {
+  if (!name || !attendance) {
+    return true;
+  }
+
+  if (!name.v.trim()) {
+    return true;
+  }
+
+  const attendanceValue = attendance.v;
+  if (typeof attendanceValue === 'string' && !attendanceValue.trim()) {
+    return true;
+  }
 }
 
 process.stdin.setRawMode(true);
