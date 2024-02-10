@@ -1,9 +1,8 @@
 import readline from 'readline';
 import clipboardy from 'clipboardy';
 import xlsx from 'xlsx';
-readline.emitKeypressEvents(process.stdin);
 
-const members = getAttendanceMemberFromExcel();
+readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', async (k, data) => {
   if (data.name === 'r') {
@@ -15,7 +14,9 @@ process.stdin.on('keypress', async (k, data) => {
 
 await doProcess();
 async function doProcess() {
-  const message = createMessage(splitMembers(shuffleMembers(members)));
+  const message = createMessage(
+    splitMembers(shuffleMembers(getAttendanceMemberFromExcel())),
+  );
   await clipboardy.write(message);
   showMessage(message);
 }
@@ -77,17 +78,28 @@ function splitMembers(members) {
     case 1:
       countOfFourMember = Math.floor(memberCount / limit) - 2;
       countOfThreeMember = 3;
-      return splitByTeamCount(countOfFourMember, countOfThreeMember, limit);
+      return splitByTeamCount(
+        members,
+        countOfFourMember,
+        countOfThreeMember,
+        limit,
+      );
     case 2:
       countOfFourMember = Math.floor(memberCount / limit) - 1;
       countOfThreeMember = 2;
-      return splitByTeamCount(countOfFourMember, countOfThreeMember, limit);
+      return splitByTeamCount(
+        members,
+        countOfFourMember,
+        countOfThreeMember,
+        limit,
+      );
     default:
       throw new Error(`Server Error, remainder=${remainder}`);
   }
 }
 
 function splitByTeamCount(
+  members,
   countOfFourMember,
   countOfThreeMember,
   increaseAmount,
