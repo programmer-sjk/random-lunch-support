@@ -3,21 +3,42 @@ import clipboardy from 'clipboardy';
 import xlsx from 'xlsx';
 readline.emitKeypressEvents(process.stdin);
 
-const workbook = xlsx.readFile('random_lunch.xlsx');
-const sheetName = workbook.SheetNames[0];
-const sheet = workbook.Sheets[sheetName];
-
-const range = xlsx.utils.decode_range(sheet['!ref']);
-const rowCount = range.e.r;
-const members = [];
-for (let i = 2; i <= rowCount; i++) {
-  const name = sheet[`A${i}`];
-  const attendance = sheet[`B${i}`];
-
-  if (isInvalid(name, attendance)) {
-    continue;
+const members = getAttendanceMemberFromExcel();
+process.stdin.setRawMode(true);
+process.stdin.on('keypress', async (k, data) => {
+  if (data.name === 'r') {
+    await doProcess();
+  } else {
+    process.exit();
   }
-  members.push(name.v);
+});
+
+await doProcess();
+async function doProcess() {
+  const message = createMessage(splitMembers(shuffleMembers(members)));
+  await clipboardy.write(message);
+  showMessage(message);
+}
+
+function getAttendanceMemberFromExcel() {
+  const workbook = xlsx.readFile('random_lunch.xlsx');
+  const sheetName = workbook.SheetNames[0];
+  const sheet = workbook.Sheets[sheetName];
+
+  const range = xlsx.utils.decode_range(sheet['!ref']);
+  const rowCount = range.e.r;
+
+  const members = [];
+  for (let i = 2; i <= rowCount; i++) {
+    const name = sheet[`A${i}`];
+    const attendance = sheet[`B${i}`];
+
+    if (isInvalid(name, attendance)) {
+      continue;
+    }
+    members.push(name.v);
+  }
+  return members;
 }
 
 function isInvalid(name, attendance) {
@@ -33,22 +54,6 @@ function isInvalid(name, attendance) {
   if (typeof attendanceValue === 'string' && !attendanceValue.trim()) {
     return true;
   }
-}
-
-process.stdin.setRawMode(true);
-process.stdin.on('keypress', async (k, data) => {
-  if (data.name === 'r') {
-    await doProcess();
-  } else {
-    process.exit();
-  }
-});
-
-await doProcess();
-async function doProcess() {
-  const message = createMessage(splitMembers(shuffleMembers(members)));
-  await clipboardy.write(message);
-  showMessage(message);
 }
 
 function shuffleMembers(members) {
