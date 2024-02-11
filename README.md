@@ -38,3 +38,18 @@
 - 출근 여부에 데이터가 있는 경우 3-4명씩 팀이 되도록 랜덤하게 배치한다.
 - Windows 클립보드에 복사해서 Slack에 Ctrl+v만 누르면 복사되어야 한다.
 - 랜덤하게 섞인 멤버들을 보고 재 배치할 수 있어야 한다.
+
+## 주요 개발 내용
+
+### Mac에서 만든 스크립트를 Windows에서 실행시키기
+
+- NodeJS 파일을 Windows 프로그램으로 변환할 수 있는 방법으로 3가지를 찾았다.
+  - [pkg](https://github.com/vercel/pkg)
+  - [node-webkit](https://nwjs.io/)
+  - [electron](https://www.electronjs.org/)
+- 위 3가지 방법 중 electron을 제외했다.
+  - 만드는 프로그램은 정말 간단하다.
+  - 하지만 Electron은 Chromium이랑 NodeJS가 같이 빌드가 된다.
+  - 간단한 프로그램도 기본적으로 100MB가 넘는 용량을 가진다.
+
+### pkg
