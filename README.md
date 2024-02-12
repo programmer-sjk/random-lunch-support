@@ -68,3 +68,7 @@
   - 참석하는 멤버들을 3,4명을 기준으로 섞어서 조를 배치하고 화면에 보여준다.
   - r을 누르면 재 배치하고 보여주고, 그 외의 키를 입력하면 클립보드에 복사한다.
 - 인사 담당자는 멤버를 확인하고 아무 키나 입력해 프로그램을 종료, Slack 채널에 그대로 복사해서 공유한다.
+
+## 실행 결과
+
+<img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/result.png" width="400">
