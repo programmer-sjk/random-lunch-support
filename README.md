@@ -43,13 +43,28 @@
 
 ### Mac에서 만든 스크립트를 Windows에서 실행시키기
 
-- NodeJS 파일을 Windows 프로그램으로 변환할 수 있는 방법으로 3가지를 찾았다.
+- NodeJS 파일을 Windows 프로그램으로 변환할 수 있는 방법으로 3가지를 고민했다.
   - [pkg](https://github.com/vercel/pkg)
   - [node-webkit](https://nwjs.io/)
   - [electron](https://www.electronjs.org/)
-- 위 3가지 방법 중 electron을 제외했다.
-  - 만드는 프로그램은 정말 간단하다.
-  - 하지만 Electron은 Chromium이랑 NodeJS가 같이 빌드가 된다.
-  - 간단한 프로그램도 기본적으로 100MB가 넘는 용량을 가진다.
+- 위 3가지 방법을 비교하다가 electron, node-webkit은 제외했다.
+  - electron, node-webkit은 Chromium이랑 NodeJS가 같이 빌드가 된다.
+  - 만드려는 프로그램 기능은 간단한데, 빌드하면 기본적으로 100MB가 넘는 용량을 가지기 떄문에 제외했다.
 
 ### pkg
+
+- [pkg](https://github.com/vercel/pkg)는 실행 가능한 프로그램을 만들어주는 패키지다.
+- 만들어진 프로그램은 각 머신에서 별도의 NodeJS 설치 없어도 실행이 가능하다.
+- 아래와 같이 설치하고 windows에서 동작하는 실행 프로그램을 생성한다.
+  - `npm install pkg --dev`
+  - `pkg -t node16-win-x64 random-lunch.js`
+- 내 경우 js 파일의 라인 수가 140줄 정도 되었는데 윈도우 exe 프로그램의 크기는 34MB였다.
+
+### 주요 로직
+
+- random-lunch.js 파일에 작성된 주요 로직은 아래와 같다.
+  - js와 같은 경로에 있는 random_lunch.xlsx 파일을 읽어 멤버와 참석여부 데이터를 가져온다.
+  - 이름과 참석 여부, 둘 중 하나라도 데이터가 없으면 필터링한다.
+  - 참석하는 멤버들을 3,4명을 기준으로 섞어서 조를 배치하고 화면에 보여준다.
+  - r을 누르면 재 배치하고 보여주고, 그 외의 키를 입력하면 클립보드에 복사한다.
+- 인사 담당자는 멤버를 확인하고 아무 키나 입력해 프로그램을 종료, Slack 채널에 그대로 복사해서 공유한다.
