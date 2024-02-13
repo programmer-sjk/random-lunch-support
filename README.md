@@ -71,4 +71,4 @@
 
 ## 실행 결과
 
-<img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/result.png" width="400">
+<img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/result.png" width="550">
