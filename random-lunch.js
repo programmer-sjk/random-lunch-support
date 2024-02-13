@@ -1,10 +1,11 @@
 import readline from 'readline';
 import clipboardy from 'clipboardy';
 import xlsx from 'xlsx';
+import chalk from 'chalk';
 
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
-process.stdin.on('keypress', async (k, data) => {
+process.stdin.on('keypress', async (_, data) => {
   if (data.name === 'r') {
     await doProcess();
   } else {
@@ -17,7 +18,7 @@ async function doProcess() {
   const message = createMessage(
     splitMembers(shuffleMembers(getAttendanceMemberFromExcel())),
   );
-  await clipboardy.write(message);
+  await clipboardy.write('오늘의 랜덤런치! \n' + message);
   showMessage(message);
 }
 
@@ -123,17 +124,20 @@ function splitByTeamCount(
 }
 
 function createMessage(members) {
-  let message = '오늘의 랜덤런치!';
+  let message = '\n';
   for (const member of members) {
-    message += `\n • ${member.join(', ')}`;
+    message += ` • ${member.join(', ')}\n`;
   }
   return message;
 }
 
 function showMessage(message) {
-  console.log('안녕하세요. HR 담당자님!');
-  console.log(message);
+  console.log(chalk.green('안녕하세요. HR 담당자님!'));
+  console.log(chalk.green('오늘의 랜덤런치!'));
+  console.log(chalk.magentaBright(message));
   console.log(
-    '재실행은 R 입력, 다른 키는 랜덤 런치 결과가 클립보드에 복사되며 종료됩니다.',
+    chalk.green(
+      '재실행은 R 입력, 다른 키는 랜덤 런치 결과가 클립보드에 복사되며 종료됩니다.',
+    ),
   );
 }
