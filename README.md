@@ -72,3 +72,20 @@
 ## 실행 결과
 
 <img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/result.png" width="550">
+
+## Trouble Shooting
+
+### ESM 문제
+
+- 프로그램이 윈도우에서 실행 하자마자 종료되어 확인해보니 빌드시 아래와 같이 warning 메시지를 볼 수 있었다.
+
+```txt
+pkg -t node16-win-x64 random-lunch.js
+> pkg@5.8.1
+> Warning Babel parse has failed: import.meta may appear only with 'sourceType: "module"' (5:45)
+> Warning Babel parse has failed: import.meta may appear only with 'sourceType: "module"' (6:45)
+```
+
+- 검색 후 [해당 이슈](https://github.com/vercel/pkg/issues/1291)를 보고 import 대신 require를 사용했다.
+- 설치한 라이브러리 중 ESM만 지원하는 라이브러리는 버전을 낮춰 require로 동작하는 버전으로 수정했다.
+
