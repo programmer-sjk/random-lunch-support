@@ -1,7 +1,7 @@
-import readline from 'readline';
-import clipboardy from 'clipboardy';
-import xlsx from 'xlsx';
-import chalk from 'chalk';
+const readline = require('readline');
+const clipboardy = require('clipboardy');
+const xlsx = require('xlsx');
+const chalk = require('chalk');
 
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
@@ -13,7 +13,7 @@ process.stdin.on('keypress', async (_, data) => {
   }
 });
 
-await doProcess();
+doProcess();
 async function doProcess() {
   const message = createMessage(
     splitMembers(shuffleMembers(getAttendanceMemberFromExcel())),
