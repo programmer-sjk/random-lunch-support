@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "- HR 담당자분이 바쁠 경우 랜덤 런치가 진행되지 않음 - 조금이라도 수고를 줄이고자 자동화를 조금 지원",
   "main": "random-lunch.js",
-  "type": "module",
   "scripts": {
     "start": "node random-lunch.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pkg": {
+    "assets": [
+      "node_moudles/**/*"
+    ]
   },
   "repository": {
     "type": "git",
@@ -19,8 +23,8 @@
   },
   "homepage": "https://github.com/programmer-sjk/random-lunch-support#readme",
   "dependencies": {
-    "chalk": "^5.3.0",
-    "clipboardy": "^4.0.0",
+    "chalk": "^4.1.2",
+    "clipboardy": "^2.3.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
