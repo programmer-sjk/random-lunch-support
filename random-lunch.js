@@ -1,5 +1,5 @@
 const readline = require('readline');
-const clipboardy = require('clipboardy');
+const cp = require('copy-paste');
 const xlsx = require('xlsx');
 const chalk = require('chalk');
 
@@ -18,7 +18,7 @@ async function doProcess() {
   const message = createMessage(
     splitMembers(shuffleMembers(getAttendanceMemberFromExcel())),
   );
-  await clipboardy.write('오늘의 랜덤런치! \n' + message);
+  cp.copy('오늘의 랜덤런치! \n' + message);
   showMessage(message);
 }
 
