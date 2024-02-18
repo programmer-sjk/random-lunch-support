@@ -41,7 +41,7 @@
 
 ## 주요 개발 내용
 
-### Mac에서 만든 스크립트를 Windows에서 실행시키기
+### Mac에서 만든 Node JS파일을 Windows에서 실행시키기
 
 - NodeJS 파일을 Windows 프로그램으로 변환할 수 있는 방법으로 3가지를 고민했다.
   - [pkg](https://github.com/vercel/pkg)
@@ -58,7 +58,7 @@
 - 아래와 같이 설치하고 windows에서 동작하는 실행 프로그램을 생성한다.
   - `npm install pkg --dev`
   - `pkg -t node16-win-x64 random-lunch.js`
-- 내 경우 js 파일의 라인 수가 140줄 정도 되었는데 윈도우 exe 프로그램의 크기는 34MB였다.
+- 내 경우 js 파일의 라인 수가 140줄 정도 되었는데 윈도우 exe 프로그램의 크기는 45MB였다.
 
 ### 주요 로직
 
@@ -89,3 +89,11 @@ pkg -t node16-win-x64 random-lunch.js
 - 검색 후 [해당 이슈](https://github.com/vercel/pkg/issues/1291)를 보고 import 대신 require를 사용했다.
 - 설치한 라이브러리 중 ESM만 지원하는 라이브러리는 버전을 낮춰 require로 동작하는 버전으로 수정했다.
 
+### Spawn ENOENT 에러
+
+- 윈도우에서 프로그램을 실행하니 아래 에러를 보게 되었다.
+
+  <img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/spawn-enoent-error.png" width="500">
+
+- [이 링크](https://github.com/vercel/pkg/issues/342)를 보고 runtime에 필요한 의존성 exe 파일을 다른 경로에 copy하려 했으나 이상하게 0btye의 껍데기 파일만 존재했다.
+- 문제가 되었던건 clipboardy 라이브러리 한 개 뿐이라 copy-paste 모듈로 대체했다.
