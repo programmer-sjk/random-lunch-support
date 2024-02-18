@@ -24,7 +24,7 @@
   "homepage": "https://github.com/programmer-sjk/random-lunch-support#readme",
   "dependencies": {
     "chalk": "^4.1.2",
-    "clipboardy": "^2.3.0",
+    "copy-paste": "^1.5.3",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
