@@ -58,15 +58,15 @@
 - 아래와 같이 설치하고 windows에서 동작하는 실행 프로그램을 생성한다.
   - `npm install pkg --dev`
   - `pkg -t node16-win-x64 random-lunch.js`
-- 내 경우 js 파일의 라인 수가 140줄 정도 되었는데 윈도우 exe 프로그램의 크기는 45MB였다.
+- 내 경우 js 파일의 라인 수가 140줄 정도 되었는데 **`윈도우 실행 프로그램의 크기는 45MB였다`**.
 
 ### 주요 로직
 
 - `random-lunch.js` 파일에 작성된 주요 로직은 아래와 같다.
   - js와 같은 경로에 있는 `random_lunch.xlsx` 파일을 읽어 멤버와 참석여부 데이터를 가져온다.
-  - 이름과 참석 여부, 둘 중 하나라도 데이터가 없으면 필터링한다.
+  - `이름과 참석 여부`, 둘 중 하나라도 데이터가 없으면 필터링한다.
   - 참석하는 멤버들을 3,4명을 기준으로 섞어서 조를 배치하고 화면에 보여준다.
-  - r을 누르면 재 배치하고 보여주고, 그 외의 키를 입력하면 클립보드에 복사한다.
+  - r 키를 누르면 랜덤 런치 멤버를 재 배치하고 보여주고, 그 외의 키를 입력하면 `클립보드에 결과를 복사한다`.
 - 인사 담당자는 멤버를 확인하고 아무 키나 입력해 프로그램을 종료, Slack 채널에 그대로 복사해서 공유한다.
 
 ## 실행 결과
@@ -91,9 +91,9 @@ pkg -t node16-win-x64 random-lunch.js
 
 ### Spawn ENOENT 에러
 
-- 윈도우에서 프로그램을 실행하니 아래 에러를 보게 되었다.
+- 윈도우에서 프로그램을 실행하니 아래와 같이 **`SPAWN ENOENT`** 에러를 보게 되었다.
 
-  <img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/spawn-enoent-error.png" width="500">
+  <img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/spawn-enoent-error.png" width="650">
 
 - [이 링크](https://github.com/vercel/pkg/issues/342)를 보고 runtime에 필요한 의존성 exe 파일을 다른 경로에 copy하려 했으나 이상하게 0btye의 껍데기 파일만 존재했다.
 - 문제가 되었던건 clipboardy 라이브러리 한 개 뿐이라 copy-paste 모듈로 대체했다.
