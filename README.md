@@ -77,7 +77,7 @@
 
 ### ESM 문제
 
-- 프로그램이 윈도우에서 실행 하자마자 종료되어 확인해보니 빌드시 아래와 같이 warning 메시지를 볼 수 있었다.
+- 프로그램이 윈도우에서 실행 하자마자 종료되어 확인해보니 빌드시 아래와 같이 `warning` 메시지를 볼 수 있었다.
 
 ```txt
 pkg -t node16-win-x64 random-lunch.js
@@ -86,7 +86,7 @@ pkg -t node16-win-x64 random-lunch.js
 > Warning Babel parse has failed: import.meta may appear only with 'sourceType: "module"' (6:45)
 ```
 
-- 검색 후 [해당 이슈](https://github.com/vercel/pkg/issues/1291)를 보고 import 대신 require를 사용했다.
+- 검색 후 [해당 이슈](https://github.com/vercel/pkg/issues/1291)를 보고 **`import 대신 require를 사용했다`**.
 - 설치한 라이브러리 중 ESM만 지원하는 라이브러리는 버전을 낮춰 require로 동작하는 버전으로 수정했다.
 
 ### Spawn ENOENT 에러
@@ -96,4 +96,4 @@ pkg -t node16-win-x64 random-lunch.js
   <img src="https://github.com/programmer-sjk/random-lunch-support/blob/main/images/spawn-enoent-error.png" width="650">
 
 - [이 링크](https://github.com/vercel/pkg/issues/342)를 보고 runtime에 필요한 의존성 exe 파일을 다른 경로에 copy하려 했으나 이상하게 0btye의 껍데기 파일만 존재했다.
-- 문제가 되었던건 clipboardy 라이브러리 한 개 뿐이라 copy-paste 모듈로 대체했다.
+- 문제가 되었던건 `clipboardy` 라이브러리 한 개 뿐이라 `copy-paste` 모듈로 대체했다.
